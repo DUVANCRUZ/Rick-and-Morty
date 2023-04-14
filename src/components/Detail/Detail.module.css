@@ -1,0 +1,27 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    color: white;
+    margin: 40px;
+    justify-content: center;
+}
+
+.image{
+    display:flex;
+    margin-left: 20px;
+}
+.description{
+    display: flex;
+    flex-direction: column;
+}
+
+.Link{
+    color:white
+}
+.button{
+    background-color: rgb(56, 19, 91);
+    color: white
+}
+.button:hover{
+    background-color:rgb(9, 1, 16);
+}

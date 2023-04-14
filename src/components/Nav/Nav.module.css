@@ -1,0 +1,25 @@
+.Nave{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    width: 100%;
+}
+.Links{ 
+    display: flex;
+}
+
+
+.favbutton{
+    width: fit-content;
+}
+
+.Link{
+    color:white
+}
+.button{
+    background-color: rgb(56, 19, 91);
+    color: white
+}
+.button:hover{
+    background-color:rgb(9, 1, 16);
+}

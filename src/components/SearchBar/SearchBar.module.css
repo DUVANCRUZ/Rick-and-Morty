@@ -1,0 +1,21 @@
+.SearchBar{
+    display: flex;
+}
+
+.input{
+    color: white;
+    background-color:rgb(56, 19, 91);
+    margin: 10px
+}
+
+.input:hover{
+    background-color:rgb(9, 1, 16);
+}
+
+.button{
+    background-color: rgb(56, 19, 91);
+    color: white
+}
+.button:hover{
+    background-color:rgb(9, 1, 16);
+}
