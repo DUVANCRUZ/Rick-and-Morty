@@ -11,20 +11,21 @@ import Favorites from './components/Favorites/Favorites';
 import style from "./App.css"
 
 
-const URLBASE= "https://be-a-rym.up.railway.app/api/character"
-const KEY= "16f6062dc1ba.d6bbc5810b692bf4707a"
+
 function App() {
    const [characters, setCharacters]= useState([]);
    const location= useLocation();
    const navigate= useNavigate(); 
    const [access, setAccess] = useState(false)
    const onSearch=(id)=> {
-      if(characters.find((char)=> char.id=== id)) {
+      if(characters.find((char)=> char.id=== +id)) {
          return alert ("Estas agregando un personaje repetido")
       }
-      axios(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {    
-         if (data.name) {
-            setCharacters((oldChars) => [...oldChars, data]);
+      axios(`http://localhost:3001/rickandmorty/character/${id}`)
+      .then(({ data }) => {   
+         const {character}=data
+         if (character.name) {
+            setCharacters((oldChars) => [...oldChars, character]);
          } else {
             window.alert('¡No hay personajes con este ID!');
          }
@@ -33,14 +34,17 @@ function App() {
    const onClose=(id)=>{
       setCharacters(characters.filter((char) => char.id !== id))
    }
-   const username= "duvandres9820@gmail.com";
-   const password= "Asd123"
-   const login= (userData) =>{
-      if(userData.username === username && userData.password === password){
-         setAccess(true);
-         navigate("/home")
-      }
+   const login=(userData)=> {
+      const { username, password } = userData;
+      const URL = 'http://localhost:3001/rickandmorty/login/';
+      axios(URL + `?email=${username}&password=${password}`)
+      .then(({ data }) => {
+         const { access } = data;
+         setAccess(access); 
+         access && navigate('/home');
+      });
    }
+
    useEffect(()=>{
       !access && navigate("/");
    }, [access])

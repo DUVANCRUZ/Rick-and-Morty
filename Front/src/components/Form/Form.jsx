@@ -36,7 +36,7 @@ const Form = ({login})=>{
             <label htmlFor="password">Password</label>
             <input  className={style.input} type="password" name="password" onChange={handleInputChange} value={userData.password} placeholder="Escribe tu contraseña"/>
             {errors.password && <p style={{color: "red"}} > {errors.password}</p>}
-            <button  className={style.button}>LOGIN</button>
+            <button className={style.button}>LOGIN</button>
 
 
         </form>
