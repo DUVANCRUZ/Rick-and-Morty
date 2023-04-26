@@ -17,33 +17,37 @@ function App() {
    const location= useLocation();
    const navigate= useNavigate(); 
    const [access, setAccess] = useState(false)
-   const onSearch=(id)=> {
+   const onSearch= async (id)=> {
       if(characters.find((char)=> char.id=== +id)) {
          return alert ("Estas agregando un personaje repetido")
       }
-      axios(`http://localhost:3001/rickandmorty/character/${id}`)
-      .then(({ data }) => {   
-         const {character}=data
+      try {
+         const {data}= await axios(`http://localhost:3001/rickandmorty/character/${id}`)
+         const {character}=data;
          if (character.name) {
             setCharacters((oldChars) => [...oldChars, character]);
-         } else {
-            window.alert('¡No hay personajes con este ID!');
          }
-      });
+      } catch (error) {
+         window.alert('¡No hay personajes con este ID!')
+         
+      }
+      
    }
    const onClose=(id)=>{
       setCharacters(characters.filter((char) => char.id !== id))
    }
-   const login=(userData)=> {
+   const login= async (userData)=> {
+     try {
       const { username, password } = userData;
       const URL = 'http://localhost:3001/rickandmorty/login/';
-      axios(URL + `?email=${username}&password=${password}`)
-      .then(({ data }) => {
-         const { access } = data;
-         setAccess(access); 
-         access && navigate('/home');
-      });
-   }
+      const{data}= await  axios(URL + `?email=${username}&password=${password}`)
+      const { access } = data;
+      setAccess(access); 
+      access && navigate('/home');
+     } catch (error) {
+      console.log(error.message)
+     }
+}
 
    useEffect(()=>{
       !access && navigate("/");
